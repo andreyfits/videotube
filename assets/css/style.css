@@ -25,7 +25,7 @@ html, body {
     align-items: center;
 }
 
-#mastHeadContainer button {
+#mastHeadContainer button:not(.searchButton) {
     cursor: pointer;
     width: 40px;
     height: 40px;
