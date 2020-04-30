@@ -13,7 +13,9 @@
 
 		</div>
 		<div id="mainSectionContainer">
-
+            <div id="mainContentContainer">
+                hello everyone
+            </div>
 		</div>
 	</div>
 </body>
