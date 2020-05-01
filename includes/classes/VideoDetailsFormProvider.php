@@ -15,14 +15,14 @@ class VideoDetailsFormProvider
 		$fileInput = $this->createFileInput();
 		$titleInput = $this->createTitleInput();
 		$descriptionInput = $this->createDescriptionInput();
-		$categoriesInput = $this->createCategoriesInput();
 		$privacyInput = $this->createPrivacyInput();
+		$categoriesInput = $this->createCategoriesInput();
 		return "<form action='processing.php' method='post'> 
 					$fileInput
 					$titleInput
 					$descriptionInput
-					$categoriesInput
 					$privacyInput
+					$categoriesInput
 				</form>";
 	}
 
@@ -63,8 +63,19 @@ class VideoDetailsFormProvider
 		$query = $this->con->prepare("SELECT * FROM categories");
 		$query->execute();
 
+		$html = "<div class='form-group'>
+					<select class='form-control' name='categoryInput'>";
+
 		while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
-			echo $row["name"] . "<br>";
+			$id = $row["id"];
+			$name = $row["name"];
+
+			$html .= "<option value='$id'>$name</option>";
 		}
+
+		$html .= "</select>
+				</div>";
+
+		return $html;
 	}
 }
