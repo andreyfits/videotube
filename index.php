@@ -22,9 +22,17 @@
                 <form action="search.php" method="get">
                     <input type="text" class="searchBar" name="term" placeholder="Search...">
                     <button class="searchButton">
-                        <img src="assets/images/icons/search.png" alt="Search button" title="Search">
+                        <img src="assets/images/icons/search.png" alt="Search button">
                     </button>
                 </form>
+            </div>
+            <div class="rightIcons">
+                <a href="upload.php">
+                    <img src="assets/images/icons/upload.png" alt="Upload">
+                </a>
+                <a href="#">
+                    <img src="assets/images/profilePictures/default.png" alt="Profile">
+                </a>
             </div>
 		</div>
 		<div id="sideNavContainer" style="display: none;">
