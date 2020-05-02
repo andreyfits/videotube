@@ -161,6 +161,9 @@ class VideoProcessor
 
 		$duration = $this->getVideoDuration($filePath);
 
+		$videoId = $this->con->lastInsertId();
+		$this->updateDuration($duration, $videoId);
+
 		echo "duration: $duration";
 
 	}
@@ -168,5 +171,14 @@ class VideoProcessor
 	private function getVideoDuration($filePath)
 	{
 		return (int)shell_exec("$this->ffprobePath -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 $filePath");
+	}
+
+	private function updateDuration($duration, $videoId)
+	{
+		$hours = floor($duration / 3600);
+		$mins = floor(($duration - ($hours * 3600)) / 60);
+		$secs = floor($duration % 60);
+
+
 	}
 }
