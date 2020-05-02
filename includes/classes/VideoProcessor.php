@@ -68,6 +68,11 @@ class VideoProcessor
 				echo "Upload failed\n";
 				return false;
 			}
+
+			if (!$this->generateThumbnails($finalFilePath)) {
+				echo "Upload failed - could not generate thumbnails\n";
+				return false;
+			}
 		}
 	}
 
@@ -146,5 +151,22 @@ class VideoProcessor
 		}
 
 		return true;
+	}
+
+	public function generateThumbnails($filePath)
+	{
+		$thumbnailSize = "210x118";
+		$numThumbnails = 3;
+		$pathToThumbnail = "uploads/videos/thumbnails";
+
+		$duration = $this->getVideoDuration($filePath);
+
+		echo "duration: $duration";
+
+	}
+
+	private function getVideoDuration($filePath)
+	{
+		return (int)shell_exec("$this->ffprobePath -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 $filePath");
 	}
 }
