@@ -23,6 +23,14 @@ class VideoProcessor
 		$tempFilePath = str_replace(" ", "", $tempFilePath);
 
 		$isValidData = $this->processData($videoData, $tempFilePath);
+
+		if (!$isValidData) {
+			return false;
+		}
+
+		if (move_uploaded_file($videoData["tmp_name"], $tempFilePath)) {
+			echo "File moved successfully";
+		}
 	}
 
 	private function processData($videoData, $filePath)
@@ -35,7 +43,12 @@ class VideoProcessor
 		} elseif (!$this->isValidType($videoType)) {
 			echo "Invalid file type";
 			return false;
+		} elseif ($this->hasError($videoData)) {
+			echo "Error code: " . $videoData["error"];
+			return false;
 		}
+
+		return true;
 	}
 
 	private function isValidSize($data)
@@ -47,5 +60,10 @@ class VideoProcessor
 	{
 		$lowercased = strtolower($type);
 		return in_array($lowercased, $this->allowedTypes);
+	}
+
+	private function hasError($data)
+	{
+		return $data["error"] != 0;
 	}
 }
