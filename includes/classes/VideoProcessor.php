@@ -7,9 +7,31 @@ class VideoProcessor
 	private $sizeLimit = 500000000;
 	private $allowedTypes = array("mp4", "flv", "webm", "mkv", "vob", "ogv", "ogg", "avi", "wmv", "mov", "mpeg", "mpg");
 
+	// *** UNCOMMENT ONE OF THESE DEPENDING ON YOUR COMPUTER ***
+	//private $ffmpegPath = "ffmpeg/mac/ffmpeg"; // *** MAC (UNCOMMENT CODE IN CONSTRUCTOR) ***
+	//private $ffmpegPath = "ffmpeg/linux/ffmpeg"; // *** LINUX (UNCOMMENT CODE IN CONSTRUCTOR) ***
+	private $ffmpegPath; //  *** WINDOWS (UNCOMMENT CODE IN CONSTRUCTOR) ***
+
+	// *** ALSO UNCOMMENT ONE OF THESE DEPENDING ON YOUR COMPUTER ***
+	//private $ffprobePath = "ffmpeg/mac/ffprobe"; // *** MAC (UNCOMMENT CODE IN CONSTRUCTOR) ***
+	//private $ffprobePath = "ffmpeg/linux/ffprobe"; // *** LINUX (UNCOMMENT CODE IN CONSTRUCTOR) ***
+	private $ffprobePath; //  *** WINDOWS (UNCOMMENT CODE IN CONSTRUCTOR) ***
+
 	public function __construct($con)
 	{
 		$this->con = $con;
+
+		// *** UNCOMMENT IF USING MAC ***
+		//$this->ffmpegPath = realpath("ffmpeg/mac/ffmpeg");
+		//$this->ffprobePath = realpath("ffmpeg/mac/ffprobe");
+
+		// *** UNCOMMENT IF USING LINUX ***
+		//$this->ffmpegPath = realpath("ffmpeg/linux/ffmpeg");
+		//$this->ffprobePath = realpath("ffmpeg/linux/ffprobe");
+
+		// *** UNCOMMENT IF USING WINDOWS ***
+		$this->ffmpegPath = realpath("ffmpeg/windows/ffmpeg.exe");
+		$this->ffprobePath = realpath("ffmpeg/windows/ffprobe.exe");
 	}
 
 	public function upload($videoUploadData)
@@ -34,6 +56,11 @@ class VideoProcessor
 
 			if (!$this->insertVideoData($videoUploadData, $finalFilePath)) {
 				echo "Insert query failed";
+				return false;
+			}
+
+			if (!$this->convertVideoToMp4($tempFilePath, $finalFilePath)) {
+				echo "Upload failed\n";
 				return false;
 			}
 		}
@@ -86,5 +113,23 @@ class VideoProcessor
 		$query->bindParam(":filePath", $filePath);
 
 		return $query->execute();
+	}
+
+	public function convertVideoToMp4($tempFilePath, $finalFilePath)
+	{
+		$cmd = "$this->ffmpegPath -i $tempFilePath $finalFilePath 2>&1";
+
+		$outputLog = array();
+		exec($cmd, $outputLog, $returnCode);
+
+		if ($returnCode != 0) {
+			//Command failed
+			foreach ($outputLog as $line) {
+				echo $line . "<br>";
+			}
+			return false;
+		}
+
+		return true;
 	}
 }
