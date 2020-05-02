@@ -17,12 +17,14 @@ class VideoDetailsFormProvider
 		$descriptionInput = $this->createDescriptionInput();
 		$privacyInput = $this->createPrivacyInput();
 		$categoriesInput = $this->createCategoriesInput();
+		$uploadButton = $this->createUploadButton();
 		return "<form action='processing.php' method='post'> 
 					$fileInput
 					$titleInput
 					$descriptionInput
 					$privacyInput
 					$categoriesInput
+					$uploadButton
 				</form>";
 	}
 
@@ -77,5 +79,9 @@ class VideoDetailsFormProvider
 				</div>";
 
 		return $html;
+	}
+
+	private function createUploadButton() {
+		return "<button type='submit' class='btn btn-primary' name='uploadButton'>Upload</button>";
 	}
 }
