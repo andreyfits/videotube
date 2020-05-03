@@ -1,8 +1,19 @@
 <?php
 require_once("includes/config.php");
 
+
+function sanitizeFormString($inputText)
+{
+	$inputText = strip_tags($inputText);
+	$inputText = str_replace(" ", "", $inputText);
+	$inputText = strtolower($inputText);
+	$inputText = ucfirst($inputText);
+	return $inputText;
+}
+
 if (isset($_POST["submitButton"])) {
-	$firstName = $_POST["firstName"];
+	$firstName = sanitizeFormString($_POST["firstName"]);
+
 	echo $firstName;
 }
 
