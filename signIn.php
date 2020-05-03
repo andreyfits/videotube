@@ -17,12 +17,14 @@
 <div class="signInContainer">
     <div class="column">
         <div class="header">
-
+            <img src="assets/images/icons/VideoTubeLogo.png" title="logo" alt="Site logo">
+            <h3>Sign In</h3>
+            <span>to continue to VideoTube</span>
         </div>
         <div class="loginForm">
 
         </div>
-        <a class="signInMessage" href="signIn.php">Already have an account? Sign in here!</a>
+        <a class="signInMessage" href="signUp.php">Need an account? Sign up here!</a>
     </div>
 </div>
 
