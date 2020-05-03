@@ -22,7 +22,11 @@
             <span>to continue to VideoTube</span>
         </div>
         <div class="loginForm">
-
+            <form action="signIn.php" method="post">
+                <input type="text" name="username" placeholder="Username" required autocomplete="off">
+                <input type="password" name="password" placeholder="Password" required>
+                <input type="submit" name="submitButton" value="SUBMIT">
+            </form>
         </div>
         <a class="signInMessage" href="signUp.php">Need an account? Sign up here!</a>
     </div>
