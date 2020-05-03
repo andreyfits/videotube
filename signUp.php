@@ -21,8 +21,7 @@ if (isset($_POST["submitButton"])) {
 	$wasSuccessful = $account->register($firstName, $lastName, $username, $email, $email2, $password, $password2);
 
 	if ($wasSuccessful) {
-		// SUCCESS
-		// Redirect user to index page
+        echo "SUCCESS";
 	}
 }
 
