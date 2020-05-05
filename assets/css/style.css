@@ -335,11 +335,13 @@ a:hover {
 .subscribeButtonContainer .subscribe {
     background-color: #f00;
     color: #fff;
+    outline: none;
 }
 
 .subscribeButtonContainer .unsubscribe {
     background-color: #eee;
     color: rgba(17, 17, 17, 0.6);
+    outline: none;
 }
 
 .editVideoButtonContainer .edit {
