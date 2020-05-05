@@ -347,6 +347,7 @@ a:hover {
 .editVideoButtonContainer .edit {
     background-color: #2692e6;
     color: #fff;
+    outline: none;
 }
 
 .secondaryInfo .topRow .uploadInfo .owner a {
