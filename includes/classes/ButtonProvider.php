@@ -5,7 +5,8 @@ class ButtonProvider
 {
 	public static string $signInFunction = "notSignedIn()";
 
-	public static function createLink($link) {
+	public static function createLink($link)
+	{
 		return User::isLoggedIn() ? $link : ButtonProvider::$signInFunction;
 	}
 
@@ -13,7 +14,7 @@ class ButtonProvider
 	{
 		$image = ($imageSrc == null) ? "" : "<img src='$imageSrc'>";
 
-		$action  = ButtonProvider::createLink($action);
+		$action = ButtonProvider::createLink($action);
 
 		return "<button class='$class' onclick='$action'>
                     $image
@@ -21,5 +22,14 @@ class ButtonProvider
                 </button>";
 	}
 
+	public static function createUserProfileButton($con, $username)
+	{
+		$userObj = new User($con, $username);
+		$profilePic = $userObj->getProfilePic();
+		$link = "profile.php?username=$username";
 
+		return "<a href='$link'>
+                    <img src='$profilePic' class='profilePicture'>
+                </a>";
+	}
 }
