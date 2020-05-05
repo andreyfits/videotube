@@ -16,9 +16,13 @@ class User
 		$this->sqlData = $query->fetch(PDO::FETCH_ASSOC);
 	}
 
+	public static function isLoggedIn() {
+		return isset($_SESSION["userLoggedIn"]);
+	}
+
 	public function getUsername()
 	{
-		return $this->sqlData["username"];
+		return $this->sqlData["username"] ?? ButtonProvider::$signInFunction;
 	}
 
 	public function getName()

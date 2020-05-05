@@ -6,8 +6,7 @@ $(document).ready(function () {
 
         if (main.hasClass("leftPadding")) {
             nav.hide();
-        }
-        else {
+        } else {
             nav.show();
         }
 
@@ -15,3 +14,7 @@ $(document).ready(function () {
 
     });
 });
+
+function notSignedIn() {
+    alert("You must be signed in to perform this action");
+}
