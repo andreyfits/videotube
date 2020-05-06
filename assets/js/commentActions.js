@@ -21,3 +21,15 @@ function toggleReply(button) {
 
     commentForm.toggleClass("hidden");
 }
+
+function likeComment(commentId, button, videoId) {
+    $.post("ajax/likeComment.php", {commentId: commentId, videoId: videoId}).done(function () {
+
+    });
+}
+
+function dislikeComment(commentId, button, videoId) {
+    $.post("ajax/dislikeComment.php", {commentId: commentId, videoId: videoId}).done(function () {
+
+    });
+}
