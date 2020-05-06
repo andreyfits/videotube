@@ -30,17 +30,17 @@ class CommentSection
 		// Get comments html
 
 		return "<div class='commentSection'>
-					<div class='header'>
-						<span class='commentCount'>$numComments Comments</span>
-						<div class='commentForm'>
+                    <div class='header'>
+                        <span class='commentCount'>$numComments Comments</span>
+                        <div class='commentForm'>
                             $profileButton
                             <textarea class='commentBodyClass' placeholder='Add a public comment'></textarea>
                             $commentButton
                         </div>
-                        <div class='comments'>
-                        
-                    	</div>
-					</div>
-				</div>";
+                    </div>
+                    <div class='comments'>
+                    	
+                    </div>
+                </div>";
 	}
 }
