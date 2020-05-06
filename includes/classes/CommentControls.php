@@ -49,12 +49,34 @@ class CommentControls
 
 	private function createLikeButton()
 	{
-		return "";
+		$commentId = $this->comment->getId();
+		$videoId = $this->comment->getVideoId();
+		$action = "likeComment($commentId, this, $videoId)";
+		$class = "likeButton";
+
+		$imageSrc = "assets/images/icons/thumb-up.png";
+
+		if ($this->comment->wasLikedBy()) {
+			$imageSrc = "assets/images/icons/thumb-up-active.png";
+		}
+
+		return ButtonProvider::createButton("", $imageSrc, $action, $class);
 	}
 
 	private function createDislikeButton()
 	{
-		return "";
+		$commentId = $this->comment->getId();
+		$videoId = $this->comment->getVideoId();
+		$action = "dislikeComment($commentId, this, $videoId)";
+		$class = "dislikeButton";
+
+		$imageSrc = "assets/images/icons/thumb-down.png";
+
+		if ($this->comment->wasDislikedBy()) {
+			$imageSrc = "assets/images/icons/thumb-down-active.png";
+		}
+
+		return ButtonProvider::createButton("", $imageSrc, $action, $class);
 	}
 
 	private function createReplySection()
