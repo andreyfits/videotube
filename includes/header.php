@@ -46,9 +46,7 @@ $userLoggedInObj = new User($con, $usernameLoggedIn);
             <a href="upload.php">
                 <img src="assets/images/icons/upload.png" alt="Upload">
             </a>
-            <a href="#">
-                <img src="assets/images/profilePictures/default.png" alt="Profile">
-            </a>
+			<?php echo ButtonProvider::createUserProfileNavigationButton($con, $userLoggedInObj->getUsername()); ?>
         </div>
     </div>
     <div id="sideNavContainer" style="display: none;">
