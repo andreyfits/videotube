@@ -6,14 +6,14 @@ require_once("includes/classes/FormSanitizer.php");
 
 $account = new Account($con);
 
-if(isset($_POST["submitButton"])) {
+if (isset($_POST["submitButton"])) {
 
 	$username = FormSanitizer::sanitizeFormUsername($_POST["username"]);
 	$password = FormSanitizer::sanitizeFormPassword($_POST["password"]);
 
 	$wasSuccessful = $account->login($username, $password);
 
-	if($wasSuccessful) {
+	if ($wasSuccessful) {
 		$_SESSION["userLoggedIn"] = $username;
 		header("Location: index.php");
 	}
@@ -26,6 +26,7 @@ function getInputValue($name)
 		echo $_POST[$name];
 	}
 }
+
 ?>
 <!DOCTYPE html>
 <html>
