@@ -3,11 +3,11 @@
 
 class SettingsFormProvider
 {
-	public function createUserDetailsForm()
+	public function createUserDetailsForm($fistName, $lastName, $email)
 	{
-		$firstNameInput = $this->createFirstNameInput(null);
-		$lastNameInput = $this->createLastNameInput(null);
-		$emailInput = $this->createEmailInput(null);
+		$firstNameInput = $this->createFirstNameInput($fistName);
+		$lastNameInput = $this->createLastNameInput($lastName);
+		$emailInput = $this->createEmailInput($email);
 		$saveButton = $this->createSaveUserDetailsButton();
 
 		return "<form action='settings.php' method='POST' enctype='multipart/form-data'>
