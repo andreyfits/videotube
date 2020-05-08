@@ -44,6 +44,19 @@ class Account
 		}
 	}
 
+	public function updateDetails($fn, $ln, $em, $un)
+	{
+		$this->validateFirstName($fn);
+		$this->validateLastName($ln);
+		$this->validateNewEmail($em, $un);
+
+		if (empty($this->errorArray)) {
+			// Update
+		} else {
+			return false;
+		}
+	}
+
 	public function insertUserDetails($fn, $ln, $un, $em, $pw)
 	{
 		$pw = hash("sha512", $pw);
@@ -106,6 +119,23 @@ class Account
 
 		$query = $this->con->prepare("SELECT email FROM users WHERE email=:em");
 		$query->bindParam(":em", $em);
+		$query->execute();
+
+		if ($query->rowCount() != 0) {
+			array_push($this->errorArray, Constants::$emailTaken);
+		}
+	}
+
+	private function validateNewEmail($em, $un)
+	{
+		if (!filter_var($em, FILTER_VALIDATE_EMAIL)) {
+			array_push($this->errorArray, Constants::$emailInvalid);
+			return;
+		}
+
+		$query = $this->con->prepare("SELECT email FROM users WHERE email=:em AND username != :un");
+		$query->bindParam(":em", $em);
+		$query->bindParam(":un", $un);
 		$query->execute();
 
 		if ($query->rowCount() != 0) {
