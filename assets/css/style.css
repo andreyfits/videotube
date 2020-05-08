@@ -772,3 +772,14 @@ a:hover {
     cursor: pointer;
     outline: none;
 }
+
+.profileContainer .channelContent {
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-top: none;
+}
+
+.nav-item a {
+    color: rgba(17, 17, 17, 0.6);
+}
