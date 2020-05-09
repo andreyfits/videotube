@@ -15,4 +15,6 @@ class Constants
 	public static string $passwordLength = "Your password must be between 5 and 30 characters";
 
 	public static string $loginFailed = "Your username or password was incorrect";
+
+	public static string $passwordIncorrect = "Incorrect password";
 }

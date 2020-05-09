@@ -42,7 +42,19 @@ if (isset($_POST["savePasswordButton"])) {
 	$newPassword = FormSanitizer::sanitizeFormPassword($_POST["newPassword"]);
 	$newPassword2 = FormSanitizer::sanitizeFormPassword($_POST["newPassword2"]);
 
+	if ($account->updatePassword($oldPassword, $newPassword, $newPassword2, $userLoggedInObj->getusername())) {
+		$passwordMessage = "<div class='alert alert-success'>
+                                <strong>SUCCESS!</strong> Password updated successfully!
+                            </div>";
+	} else {
+		$errorMessage = $account->getFirstError();
 
+		if ($errorMessage == "") $errorMessage = "Something went wrong";
+
+		$passwordMessage = "<div class='alert alert-danger'>
+                                <strong>ERROR!</strong> $errorMessage
+                            </div>";
+	}
 }
 ?>
 
@@ -59,6 +71,9 @@ if (isset($_POST["savePasswordButton"])) {
 		?>
     </div>
     <div class="formSection">
+        <div class="message">
+			<?php echo $passwordMessage; ?>
+        </div>
 		<?php
 		echo $formProvider->createPasswordForm();
 		?>
