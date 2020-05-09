@@ -32,6 +32,9 @@ if ($video->getUploadedBy() != $userLoggedInObj->getUsername()) {
 		?>
     </div>
     <div class="bottomSection">
-
+		<?php
+		$formProvider = new VideoDetailsFormProvider($con);
+		echo $formProvider->createEditDetailsForm($video);
+		?>
     </div>
 </div>
